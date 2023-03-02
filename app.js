@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 
+const Test = require('./models/test');
+
 mongoose.set('strictQuery', true);
 
 mongoose.connect(
@@ -12,11 +14,13 @@ mongoose.connect(
   }
 ).then(() => {
   console.log("db connected");
-})
+}).catch((err) => {
+  console.log(err)
+});
 
-app.get('/', function(req, res){
+app.get('/', function(req, res) {
   res.end("Hello");
-})
+});
 
 app.listen(5000);
 
