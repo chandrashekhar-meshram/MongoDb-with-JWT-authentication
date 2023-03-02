@@ -1,11 +1,25 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const app = express();
+const secretKey = 'secretkey';
 
 app.get('/', (req, resp) => {
   resp.json({
     massage: 'A sample API'
   })
+});
+
+app.post('/login', (req, resp) => {
+  const user = {
+    id: 1,
+    username: 'anil',
+    email: 'abc@test.com'
+  }
+  jwt.sign({user}, secretKey, {expiresIn: '300s'},( err, token) => {
+    resp.json({
+      token
+    })
+  });
 })
 
 app.listen(5000, ()=> {
